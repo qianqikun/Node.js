@@ -1,5 +1,5 @@
 var http = require('http'),
-    fs = require('fs')
+    fs = require('fs');
 var server = http.createServer(function (req, res) {
     if ('GET' == req.method && '/images' == req.url.substr(0, 7) && '.jpg' == req.url.substr(-4)) {
         console.log(__dirname);

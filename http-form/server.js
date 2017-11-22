@@ -15,13 +15,15 @@ require('http').createServer(function (req, res) {
     } else if ('/url' == req.url && 'POST' == req.method) {
         var body = "";
         req.on('data', function (chunk) {
+            console.log(chunk);
             body += chunk;
+            console.log(body);
         });
         req.on('end', function () {
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end('<b>Your name is <b>'+ qs.parse(body).name+'</b></p>');
+            res.end('<b>Your name is <b>' + qs.parse(body).name + '</b></p>');
         })
-    }else{
+    } else {
         res.writeHead(404);
         res.end('Not Found')
     }

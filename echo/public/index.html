@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket echo test</title>
+
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.slim.js"></script>
+<body>
+<h1>Websocket Echo</h1>
+<h2>Latency: <span id="latency"></span>ms</h2>
+<script>
+    var lastMessage;
+    var socket = io.connect('http://localhost:3000');
+    socket.on('connect', function () {
+        ping();
+    });
+    socket.on('message', function (msg) {
+        console.log(msg);
+        document.getElementById('latency').innerHTML = new Date - lastMessage;
+        ping();
+    });
+
+    function ping() {
+        lastMessage = new Date;
+        socket.emit('message','ping',function(){
+        
+        })
+    }
+    socket.on('disconnect', function () {
+        ping();
+    });
+</script>
+
+</body>
+</html>
